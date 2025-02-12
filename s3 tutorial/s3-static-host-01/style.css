@@ -1,0 +1,21 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#nav{
+    border:2px solid black;
+    margin: 3px;
+    padding: 10px;
+    color: white;
+    background-color: green;
+}
+#img{
+    display: flex;
+    justify-content: center;
+}
+img{
+    height:500px;
+    width:400px;
+    
+}
