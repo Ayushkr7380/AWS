@@ -1,4 +1,9 @@
-import {GetObjectCommand, PutObjectCommand, S3Client} from "@aws-sdk/client-s3";
+import {
+    GetObjectCommand,
+    PutObjectCommand,
+    S3Client,
+    ListObjectsV2Command
+    }from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import dotenv  from "dotenv";
 
@@ -33,11 +38,22 @@ async function putObject(filename,contentType){
     return url;
 }
 
+//List Object
+async function listObjects(){
+    const command = new ListObjectsV2Command({
+        Bucket:"ayush-private",
+        Key:"/"
+    })
+    const list = await s3Client.send(command);
+    console.log(list);
+}
 
 async function init(){
-    console.log("Url is : ", await getObjectURL("uploads/user-uploads/video-1739434193984.mp4"));
+    // console.log("Url is : ", await getObjectURL("uploads/user-uploads/video-1739434193984.mp4"));
     // console.log('URL for upoading ',await putObject(`image-${Date.now()}.jpg`,"image/jpg"));
     // console.log('URL for upoading ',await putObject(`video-${Date.now()}.mp4`,"video/mp4"));
+
+    await listObjects();
 }
 
 init();
