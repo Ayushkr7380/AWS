@@ -2,7 +2,8 @@ import {
     GetObjectCommand,
     PutObjectCommand,
     S3Client,
-    ListObjectsV2Command
+    ListObjectsV2Command,
+    DeleteObjectCommand
     }from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import dotenv  from "dotenv";
@@ -48,12 +49,26 @@ async function listObjects(){
     console.log(list);
 }
 
+//Delete Object
+async function deleteObject(key){
+    const command = new DeleteObjectCommand({
+        Bucket:"ayush-private",
+        Key:key
+    })
+    const result = await s3Client.send(command);
+    if(result){
+        console.log("Delete object successfully.");
+    }
+}
+
 async function init(){
     // console.log("Url is : ", await getObjectURL("uploads/user-uploads/video-1739434193984.mp4"));
     // console.log('URL for upoading ',await putObject(`image-${Date.now()}.jpg`,"image/jpg"));
     // console.log('URL for upoading ',await putObject(`video-${Date.now()}.mp4`,"video/mp4"));
 
-    await listObjects();
+    // await listObjects();
+
+    deleteObject("f1.jpg");
 }
 
 init();
